@@ -2730,7 +2730,7 @@ local script = G2L["ac"];
 		end
 	end
 	
-	local function toggleAim()	
+	local function toggleAim() 
 		AIM_PART = script.Parent.Parent.PrimaryText.Text
 		if AIM_PART == "" then AIM_PART = "Head" end
 		AimEnabled = not AimEnabled
@@ -2749,8 +2749,11 @@ local script = G2L["ac"];
 		end
 	end
 	script.Parent.MouseButton1Click:Connect(toggleAim)
-end;
 
+
+
+
+end;
 
 task.spawn(C_ac);
 -- StarterGui.RealFloppsGUI/Durka Edition.ImageLabel.AimSec.SilientAim.SilientAimButton.LocalScript
@@ -2934,7 +2937,6 @@ local function C_d7()
 				else
 					get()
 				end
-				serv.Heartbeat:Wait()
 			until not farm
 			script.Parent.Text = "Auto Farm: OFF"
 		end
