@@ -2908,7 +2908,7 @@ local function C_d7()
 		while selling do
 			if plr.Backpack:FindFirstChild('Артефакт "Плоть"') then
 				if plr.Character and plr.Character.HumanoidRootPart then
-					plr.Character.HumanoidRootPart.CFrame = CFrame.new(-122.722298, 2.99999976, 218.784363, 0.954734802, -3.36449162e-08, -0.297458351, 1.59819429e-08, 1, -6.18116758e-08, 0.297458351, 5.42597967e-08, 0.954734802)
+					plr.Character.HumanoidRootPart.CFrame = CFrame.new(-127.984467, 2.99999976, 217.851501, 0.993313074, -3.11733004e-08, 0.115452021, 3.38730146e-08, 1, -2.14219451e-08, -0.115452021, 2.51894061e-08, 0.993313074)
 				end
 			end
 			task.wait()
