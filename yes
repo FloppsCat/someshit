@@ -2755,7 +2755,6 @@ local script = G2L["ac"];
 
 end;
 
-
 task.spawn(C_ac);
 -- StarterGui.RealFloppsGUI/Durka Edition.ImageLabel.AimSec.SilientAim.SilientAimButton.LocalScript
 local function C_bd()
@@ -2903,16 +2902,24 @@ local function C_d7()
 	local script = G2L["d7"];
 	local farm = false
 	local serv = game:GetService("RunService")
+
 	local function sell()
 		local plr = game.Players.LocalPlayer
-		plr.Character.HumanoidRootPart.CFrame = CFrame.new(-122.722298, 2.99999976, 218.784363, 0.954734802, -3.36449162e-08, -0.297458351, 1.59819429e-08, 1, -6.18116758e-08, 0.297458351, 5.42597967e-08, 0.954734802)
-		serv.Heartbeat:Wait()
-		game:GetService("ReplicatedStorage"):WaitForChild("ReplicationManager"):InvokeServer("DialogFunction", "Dialog", workspace:WaitForChild("Asylum"):WaitForChild("Structure"):WaitForChild("Outside"):WaitForChild("постройки"):WaitForChild("Киоск"):WaitForChild("Dialog"):WaitForChild("DialogModule"))
-		game:GetService("ReplicatedStorage"):WaitForChild("ReplicationManager"):InvokeServer("DialogFunction", true, 1)
-		game:GetService("ReplicatedStorage"):WaitForChild("ShopInteraction"):InvokeServer(1, 3, 2)
-		game:GetService("ReplicatedStorage"):WaitForChild("ShopInteraction"):InvokeServer(2, 1)
-		serv.Heartbeat:Wait()
+
+		if plr.Character and plr.Character.HumanoidRootPart then
+			plr.Character.HumanoidRootPart.CFrame = CFrame.new(-122.722298, 2.99999976, 218.784363, 0.954734802, -3.36449162e-08, -0.297458351, 1.59819429e-08, 1, -6.18116758e-08, 0.297458351, 5.42597967e-08, 0.954734802)
+		end
+
+		task.spawn(function()
+			pcall(function()
+				game:GetService("ReplicatedStorage"):WaitForChild("ReplicationManager"):InvokeServer("DialogFunction", "Dialog", workspace:WaitForChild("Asylum"):WaitForChild("Structure"):WaitForChild("Outside"):WaitForChild("постройки"):WaitForChild("Киоск"):WaitForChild("Dialog"):WaitForChild("DialogModule"))
+				game:GetService("ReplicatedStorage"):WaitForChild("ReplicationManager"):InvokeServer("DialogFunction", true, 1)
+				game:GetService("ReplicatedStorage"):WaitForChild("ShopInteraction"):InvokeServer(1, 3, 2)
+				game:GetService("ReplicatedStorage"):WaitForChild("ShopInteraction"):InvokeServer(2, 1)
+			end)
+		end)
 	end
+
 	local function get()
 		local thisplr = game.Players.LocalPlayer
 		for i,v in pairs(workspace:GetDescendants()) do
@@ -2922,13 +2929,15 @@ local function C_d7()
 					serv.Heartbeat:Wait()
 				end
 				local click = v:FindFirstChild("ClickDetector")
-				if click then fireclickdetector(click, 1) 
+				if click then 
+					fireclickdetector(click, 1) 
 					serv.Heartbeat:Wait()
 				end
 				break
 			end
 		end
 	end
+
 	script.Parent.MouseButton1Click:Connect(function()
 		farm = not farm
 		if farm then
@@ -2940,6 +2949,7 @@ local function C_d7()
 				else
 					get()
 				end
+				task.wait()
 			until not farm
 			script.Parent.Text = "Auto Farm: OFF"
 		end
