@@ -2731,7 +2731,6 @@ local script = G2L["ac"];
 	end
 	
 	local function toggleAim()
-
 		AIM_PART = script.Parent.Parent.PrimaryText.Text
 		if AIM_PART == "" then AIM_PART = "Head" end
 		AimEnabled = not AimEnabled
@@ -2750,11 +2749,9 @@ local script = G2L["ac"];
 		end
 	end
 	script.Parent.MouseButton1Click:Connect(toggleAim)
-
-
-
-
 end;
+
+
 
 task.spawn(C_ac);
 -- StarterGui.RealFloppsGUI/Durka Edition.ImageLabel.AimSec.SilientAim.SilientAimButton.LocalScript
@@ -2905,7 +2902,6 @@ local function C_d7()
 	local serv = game:GetService("RunService")
 	local isselling = false
 	local function sell()
-		isselling = true
 		local plr = game.Players.LocalPlayer
 		while plr.Backpack:FindFirstChild('Артефакт "Плоть"') do
 			if plr.Backpack:FindFirstChild('Артефакт "Плоть"') or plr.Character:FindFirstChild('Артефакт "Плоть"') then
@@ -2914,10 +2910,9 @@ local function C_d7()
 				game:GetService("ReplicatedStorage"):WaitForChild("ReplicationManager"):InvokeServer("DialogFunction", true, 1)
 				game:GetService("ReplicatedStorage"):WaitForChild("ShopInteraction"):InvokeServer(1, 3, 2)
 				game:GetService("ReplicatedStorage"):WaitForChild("ShopInteraction"):InvokeServer(2, 1)
-				serv.Heartbeat:Wait()  -- ← МИНИМАЛЬНАЯ задержка (вместо task.wait())
 			end
+			task.wait()
 		end
-		isselling = false
 	end
 	local function get()
 		local thisplr = game.Players.LocalPlayer
@@ -2940,13 +2935,11 @@ local function C_d7()
 		if farm then
 			script.Parent.Text = "Auto Farm: ON"
 			repeat
-				if not isselling then
-					local artifact = game.Players.LocalPlayer.Backpack:FindFirstChild('Артефакт "Плоть"') or game.Players.LocalPlayer.Character:FindFirstChild('Артефакт "Плоть"')
-					if artifact then
-						sell()
-					else
-						get()
-					end
+				local artifact = game.Players.LocalPlayer.Backpack:FindFirstChild('Артефакт "Плоть"') or game.Players.LocalPlayer.Character:FindFirstChild('Артефакт "Плоть"')
+				if artifact then
+					sell()
+				else
+					get()
 				end
 				serv.Heartbeat:Wait()
 			until not farm
