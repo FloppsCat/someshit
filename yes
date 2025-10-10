@@ -2731,6 +2731,7 @@ local script = G2L["ac"];
 	end
 	
 	local function toggleAim()
+
 		AIM_PART = script.Parent.Parent.PrimaryText.Text
 		if AIM_PART == "" then AIM_PART = "Head" end
 		AimEnabled = not AimEnabled
@@ -2749,6 +2750,10 @@ local script = G2L["ac"];
 		end
 	end
 	script.Parent.MouseButton1Click:Connect(toggleAim)
+
+
+
+
 end;
 
 task.spawn(C_ac);
@@ -2905,7 +2910,6 @@ local function C_d7()
 		while plr.Backpack:FindFirstChild('Артефакт "Плоть"') do
 			if plr.Backpack:FindFirstChild('Артефакт "Плоть"') or plr.Character:FindFirstChild('Артефакт "Плоть"') then
 				plr.Character.HumanoidRootPart.CFrame = CFrame.new(-122.722298, 2.99999976, 218.784363, 0.954734802, -3.36449162e-08, -0.297458351, 1.59819429e-08, 1, -6.18116758e-08, 0.297458351, 5.42597967e-08, 0.954734802)
-				task.wait()
 				game:GetService("ReplicatedStorage"):WaitForChild("ReplicationManager"):InvokeServer("DialogFunction", "Dialog", workspace:WaitForChild("Asylum"):WaitForChild("Structure"):WaitForChild("Outside"):WaitForChild("\208\191\208\190\209\129\209\130\209\128\208\190\208\185\208\186\208\184"):WaitForChild("\208\154\208\184\208\190\209\129\208\186"):WaitForChild("Dialog"):WaitForChild("DialogModule"))
 				task.wait()
 				game:GetService("ReplicatedStorage"):WaitForChild("ReplicationManager"):InvokeServer("DialogFunction", true, 1)
@@ -2915,6 +2919,7 @@ local function C_d7()
 				game:GetService("ReplicatedStorage"):WaitForChild("ShopInteraction"):InvokeServer(2, 1)
 				task.wait()
 			end
+			task.wait()
 		end
 		isselling = false
 	end
