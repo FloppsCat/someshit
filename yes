@@ -2901,18 +2901,20 @@ local function C_d7()
 	local serv = game:GetService("RunService")
 	local function sell()
 		local plr = game.Players.LocalPlayer
-		while plr.Backpack:FindFirstChild('Артефакт "Плоть"') or plr.Character:FindFirstChild('Артефакт "Плоть"')  do
-			plr.Character.HumanoidRootPart.CFrame = CFrame.new(-122.722298, 2.99999976, 218.784363, 0.954734802, -3.36449162e-08, -0.297458351, 1.59819429e-08, 1, -6.18116758e-08, 0.297458351, 5.42597967e-08, 0.954734802)
-			task.wait()
+		for i = 1, 20 do
+			if plr.Character and plr.Character.HumanoidRootPart then
+				plr.Character.HumanoidRootPart.CFrame = CFrame.new(-122.722298, 2.99999976, 218.784363, 0.954734802, -3.36449162e-08, -0.297458351, 1.59819429e-08, 1, -6.18116758e-08, 0.297458351, 5.42597967e-08, 0.954734802)
+			end
 		end
-		task.wait()
-		game:GetService("ReplicatedStorage"):WaitForChild("ReplicationManager"):InvokeServer("DialogFunction", "Dialog", workspace:WaitForChild("Asylum"):WaitForChild("Structure"):WaitForChild("Outside"):WaitForChild("\208\191\208\190\209\129\209\130\209\128\208\190\208\185\208\186\208\184"):WaitForChild("\208\154\208\184\208\190\209\129\208\186"):WaitForChild("Dialog"):WaitForChild("DialogModule"))
-		task.wait()
-		game:GetService("ReplicatedStorage"):WaitForChild("ReplicationManager"):InvokeServer("DialogFunction", true, 1)
-		task.wait()
-		game:GetService("ReplicatedStorage"):WaitForChild("ShopInteraction"):InvokeServer(1, 3, 2)
-		task.wait()
-		game:GetService("ReplicatedStorage"):WaitForChild("ShopInteraction"):InvokeServer(2, 1)
+		if plr.Backpack:FindFirstChild('Артефакт "Плоть"') or plr.Character:FindFirstChild('Артефакт "Плоть"') then
+			game:GetService("ReplicatedStorage"):WaitForChild("ReplicationManager"):InvokeServer("DialogFunction", "Dialog", workspace:WaitForChild("Asylum"):WaitForChild("Structure"):WaitForChild("Outside"):WaitForChild("\208\191\208\190\209\129\209\130\209\128\208\190\208\185\208\186\208\184"):WaitForChild("\208\154\208\184\208\190\209\129\208\186"):WaitForChild("Dialog"):WaitForChild("DialogModule"))
+			task.wait()
+			game:GetService("ReplicatedStorage"):WaitForChild("ReplicationManager"):InvokeServer("DialogFunction", true, 1)
+			task.wait()
+			game:GetService("ReplicatedStorage"):WaitForChild("ShopInteraction"):InvokeServer(1, 3, 2)
+			task.wait()
+			game:GetService("ReplicatedStorage"):WaitForChild("ShopInteraction"):InvokeServer(2, 1)
+		end
 	end
 	local function get()
 		local thisplr = game.Players.LocalPlayer
