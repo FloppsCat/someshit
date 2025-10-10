@@ -2899,12 +2899,10 @@ local function C_d7()
 	local script = G2L["d7"];
 	local farm = false
 	local serv = game:GetService("RunService")
-	local isselling = false
 	local function sell()
-		isselling = true
 		local plr = game.Players.LocalPlayer
-		if isselling and plr.Backpack:FindFirstChild('Артефакт "Плоть"') then
-			while isselling and plr.Backpack:FindFirstChild('Артефакт "Плоть"')  do
+		if plr.Backpack:FindFirstChild('Артефакт "Плоть"') then
+			while plr.Backpack:FindFirstChild('Артефакт "Плоть"')  do
 				plr.Character.HumanoidRootPart.CFrame = CFrame.new(-122.722298, 2.99999976, 218.784363, 0.954734802, -3.36449162e-08, -0.297458351, 1.59819429e-08, 1, -6.18116758e-08, 0.297458351, 5.42597967e-08, 0.954734802)
 				task.wait()
 			end
@@ -2917,7 +2915,6 @@ local function C_d7()
 			task.wait()
 			game:GetService("ReplicatedStorage"):WaitForChild("ShopInteraction"):InvokeServer(2, 1)
 		end
-		isselling = false
 	end
 	local function get()
 		local thisplr = game.Players.LocalPlayer
@@ -2940,13 +2937,11 @@ local function C_d7()
 		if farm then
 			script.Parent.Text = "Auto Farm: ON"
 			repeat
-				if not isselling then
-					local artifact = game.Players.LocalPlayer.Backpack:FindFirstChild('Артефакт "Плоть"') or game.Players.LocalPlayer.Character:FindFirstChild('Артефакт "Плоть"')
-					if artifact then
-						sell()
-					else
-						get()
-					end
+				local artifact = game.Players.LocalPlayer.Backpack:FindFirstChild('Артефакт "Плоть"') or game.Players.LocalPlayer.Character:FindFirstChild('Артефакт "Плоть"')
+				if artifact then
+					sell()
+				else
+					get()
 				end
 				serv.Heartbeat:Wait()
 			until not farm
