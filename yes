@@ -2904,8 +2904,9 @@ local function C_d7()
 		isselling = true
 		local plr = game.Players.LocalPlayer
 		if plr.Backpack:FindFirstChild('Артефакт "Плоть"') or plr.Character:FindFirstChild('Артефакт "Плоть"') then
-			while plr.Backpack:FindFirstChild('Артефакт "Плоть"') do
-				task.wait(1)
+			while isselling do
+				task.wait()
+				plr.Character.HumanoidRootPart.CFrame = CFrame.new(9999, 9999, 9999)
 				plr.Character.HumanoidRootPart.CFrame = CFrame.new(-122.722298, 2.99999976, 218.784363, 0.954734802, -3.36449162e-08, -0.297458351, 1.59819429e-08, 1, -6.18116758e-08, 0.297458351, 5.42597967e-08, 0.954734802)
 			end
 			task.wait()
