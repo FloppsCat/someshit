@@ -2548,7 +2548,7 @@ local script = G2L["8f"];
 			elseif v:IsA("MeshPart") then
 				v.Material = "Plastic"
 				v.Reflectance = 0
-				v.TextureID = 10385902758728957
+				v.TextureID = "rbxassetid://0385902758728957"
 			end
 		end
 	
@@ -2560,7 +2560,7 @@ local script = G2L["8f"];
 		end
 	end
 	script.Parent.MouseButton1Click:Connect(function()
-		task.spawn(clearshit)
+		clearshit()
 	end)
 end;
 task.spawn(C_8f);
@@ -2736,6 +2736,7 @@ local script = G2L["b3"];
 
 
 end;
+
 
 task.spawn(C_b3);
 -- StarterGui.RealFloppsGUI/Durka Edition.ImageLabel.WeaponSec.AmmoButton.LocalScript
