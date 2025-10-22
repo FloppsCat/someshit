@@ -1086,7 +1086,6 @@ G2L["8f"] = Instance.new("LocalScript", G2L["8b"]);
 
 -- StarterGui.RealFloppsGUI/Durka Edition.ImageLabel.AimSec
 G2L["90"] = Instance.new("Frame", G2L["2"]);
-G2L["90"]["Visible"] = false;
 G2L["90"]["BorderSizePixel"] = 0;
 G2L["90"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
 G2L["90"]["Size"] = UDim2.new(0, 598, 0, 225);
@@ -1637,6 +1636,7 @@ G2L["d7"] = Instance.new("LocalScript", G2L["d3"]);
 
 -- StarterGui.RealFloppsGUI/Durka Edition.ImageLabel.BypassSec
 G2L["d8"] = Instance.new("Frame", G2L["2"]);
+G2L["d8"]["Visible"] = false;
 G2L["d8"]["BorderSizePixel"] = 0;
 G2L["d8"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
 G2L["d8"]["Size"] = UDim2.new(0, 598, 0, 225);
@@ -2708,11 +2708,47 @@ local script = G2L["b3"];
 		return nil
 	end
 	
+	local function createPurpleBeam(fromPosition, toPosition)
+		local beamContainer = Instance.new("Part")
+		beamContainer.Name = "Purpleshit"
+		beamContainer.Anchored = true
+		beamContainer.CanCollide = false
+		beamContainer.Transparency = 1
+		beamContainer.Size = Vector3.new(0.1, 0.1, 0.1)
+		beamContainer.Parent = workspace
+	
+		local attachment0 = Instance.new("Attachment")
+		local attachment1 = Instance.new("Attachment")
+
+
+		attachment0.WorldPosition = fromPosition
+		attachment1.WorldPosition = toPosition
+		attachment0.Parent = beamContainer
+		attachment1.Parent = beamContainer
+
+		local beam = Instance.new("Beam")
+		beam.Attachment0 = attachment0
+		beam.Attachment1 = attachment1
+		beam.Color = ColorSequence.new(Color3.fromRGB(170, 0, 255))
+		beam.Width0 = 0.15
+		beam.Width1 = 0.15
+		beam.Brightness = 8
+		beam.LightEmission = 0.8
+		beam.LightInfluence = 0
+		beam.FaceCamera = true
+		beam.Parent = beamContainer
+
+		task.delay(0.3, function()
+			if beamContainer and beamContainer.Parent then
+				beamContainer:Destroy()
+			end
+		end)
+	end
 	script.Parent.MouseButton1Click:Connect(function()
 		yes = not yes
 		if yes then
-			 dothis = game:GetService("RunService").Heartbeat:Connect(function()
-				 if game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character.HumanoidRootPart then
+			dothis = game:GetService("RunService").Heartbeat:Connect(function()
+				if game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character.HumanoidRootPart then
 					local thispos = findnigers()
 					if thispos then
 						local args = {
@@ -2720,6 +2756,31 @@ local script = G2L["b3"];
 						}
 						game:GetService("ReplicatedStorage"):WaitForChild("ReplicationManager"):WaitForChild("Fire"):FireServer(unpack(args))
 					end
+				end
+				for _, dildos in ipairs(game.Players:GetPlayers()) do
+					for _, c in ipairs(dildos.Character:GetChildren()) do
+						if c:IsA("Tool") then
+							if c:FindFirstChild("Handle") then
+								local muz = c.Handle.Muzzle
+								if muz:IsA("Attachment") then
+									local nigpos = findnigers()
+									local forwardDirection = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.LookVector
+									local targetPosition = muz.WorldPosition + (forwardDirection * 50)
+									if nigpos then
+										createPurpleBeam(muz.WorldPosition, nigpos)
+									end
+								end
+							end
+						end
+					end
+				end
+				local p = findnigers()
+				if p then
+					local snd = Instance.new("Sound", workspace)
+					snd.Name = "New ound"
+					snd.SoundId = "rbxassetid://17678772616"
+					snd:Play()
+					snd.Volume = 1
 				end
 			end)
 			script.Parent.Text = "Silient Aim: ON"
@@ -2736,7 +2797,6 @@ local script = G2L["b3"];
 
 
 end;
-
 task.spawn(C_b3);
 -- StarterGui.RealFloppsGUI/Durka Edition.ImageLabel.WeaponSec.AmmoButton.LocalScript
 local function C_bb()
@@ -2811,7 +2871,7 @@ local function C_c5()
 			lplr.Character.HumanoidRootPart.CFrame = CFrame.new(key.Position + offset)
 			local pp = workspace.for_pickup.FakeKeycard.Handle.ProximityPrompt
 			fireproximityprompt(pp)
-		until lplr.Backpack:FindFirstChild("Ôåéê-Êëþ÷Êàðòà")
+		until lplr.Backpack:FindFirstChild("Фейк-КлючКарта")
 	end
 	script.Parent.MouseButton1Click:Connect(function()
 		getez()
@@ -2833,7 +2893,7 @@ local function C_cd()
 
 		task.spawn(function()
 			pcall(function()
-				game:GetService("ReplicatedStorage"):WaitForChild("ReplicationManager"):InvokeServer("DialogFunction", "Dialog", workspace:WaitForChild("Asylum"):WaitForChild("Structure"):WaitForChild("Outside"):WaitForChild("ïîñòðîéêè"):WaitForChild("Êèîñê"):WaitForChild("Dialog"):WaitForChild("DialogModule"))
+				game:GetService("ReplicatedStorage"):WaitForChild("ReplicationManager"):InvokeServer("DialogFunction", "Dialog", workspace:WaitForChild("Asylum"):WaitForChild("Structure"):WaitForChild("Outside"):WaitForChild("постройки"):WaitForChild("Киоск"):WaitForChild("Dialog"):WaitForChild("DialogModule"))
 				game:GetService("ReplicatedStorage"):WaitForChild("ReplicationManager"):InvokeServer("DialogFunction", true, 1)
 				game:GetService("ReplicatedStorage"):WaitForChild("ShopInteraction"):InvokeServer(1, 3, 2)
 				game:GetService("ReplicatedStorage"):WaitForChild("ShopInteraction"):InvokeServer(2, 1)
@@ -2844,7 +2904,7 @@ local function C_cd()
 	local function get()
 		local thisplr = game.Players.LocalPlayer
 		for i,v in pairs(workspace:GetDescendants()) do
-			if v.Name == 'Àðòåôàêò "Ïëîòü"' and v:IsA("MeshPart") then
+			if v.Name == 'Артефакт "Плоть"' and v:IsA("MeshPart") then
 				if thisplr.Character and thisplr.Character.HumanoidRootPart then
 					thisplr.Character.HumanoidRootPart.CFrame = v.CFrame * CFrame.new(0, 2.5, -3)
 					serv.Heartbeat:Wait()
@@ -2864,7 +2924,7 @@ local function C_cd()
 		if farm then
 			script.Parent.Text = "Auto Farm: ON"
 			repeat
-				local artifact = game.Players.LocalPlayer.Backpack:FindFirstChild('Àðòåôàêò "Ïëîòü"') or game.Players.LocalPlayer.Character:FindFirstChild('Àðòåôàêò "Ïëîòü"')
+				local artifact = game.Players.LocalPlayer.Backpack:FindFirstChild('Артефакт "Плоть"') or game.Players.LocalPlayer.Character:FindFirstChild('Артефакт "Плоть"')
 				if artifact then
 					sell()
 				else
@@ -2888,7 +2948,7 @@ local function C_d2()
 			local timer = 0
 			isfilling =game:GetService("RunService").Heartbeat:Connect(function(delta)
 				timer = timer + delta
-				if timer >= 0.2 then -- çàäåðæêà 0.2 ñåêóíäû ìåæäó ñðàáàòûâàíèÿìè
+				if timer >= 0.2 then -- задержка 0.2 секунды между срабатываниями
 					for _, v in pairs(workspace:GetDescendants()) do
 						if v.Name == "StoikaM" or v.Name == "stoim" then
 							for _, ammos in ipairs(v:GetChildren()) do
@@ -2923,7 +2983,7 @@ local function C_d7()
 	function refill()
 		local ccheck = game.Players.LocalPlayer.Character
 		if not ccheck then return end
-		local names = {"Äóáèíêà", "Íàðó÷íèêè", "Ýëåêòðîøîêåð", "Êàðòà îõðàííèêà", "Áèòà", "Ìîëîòîâ",}
+		local names = {"Дубинка", "Наручники", "Электрошокер", "Карта охранника", "Бита", "Молотов",}
 		for i,h in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
 			if h:IsA("Tool") and not table.find(names, h.Name) then
 				local gunconf = require(h.ConfigGun)
