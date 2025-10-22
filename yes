@@ -2681,6 +2681,7 @@ local function C_b3()
 local script = G2L["b3"];
 	local yes = false
 	local dothis = nil
+	local snd = nil
 	local function findnigers()
 		local primarypartname = script.Parent.Parent.PrimaryText2.Text
 		if primarypartname == "" then return nil end
@@ -2718,9 +2719,8 @@ local script = G2L["b3"];
 		beamContainer.Parent = workspace
 	
 		local attachment0 = Instance.new("Attachment")
-		local attachment1 = Instance.new("Attachment")
-		
 
+		local attachment1 = Instance.new("Attachment")
 
 		attachment0.WorldPosition = fromPosition
 		attachment1.WorldPosition = toPosition
@@ -2775,13 +2775,23 @@ local script = G2L["b3"];
 				end
 				local p = findnigers()
 				if p then
-					local snd = Instance.new("Sound", workspace)
+					if snd and snd.Parent then
+						snd:Stop()
+						snd:Destroy()
+						snd = nil
+					end
+					snd = Instance.new("Sound", workspace)
 					snd.Name = "New ound"
 					snd.SoundId = "rbxassetid://17678772616"
 					snd.Volume = 1
 					snd:Play()
-					task.wait(0.5)
-					snd:Destroy()
+					snd.Ended:Connect(function()
+						if snd and snd.Parent then
+							snd:Stop()
+							snd:Destroy()
+							snd = nil
+						end
+					end)
 				end
 			end)
 			script.Parent.Text = "Silient Aim: ON"
