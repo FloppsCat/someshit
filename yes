@@ -2719,6 +2719,7 @@ local script = G2L["b3"];
 	
 		local attachment0 = Instance.new("Attachment")
 		local attachment1 = Instance.new("Attachment")
+		
 
 
 		attachment0.WorldPosition = fromPosition
@@ -2757,18 +2758,16 @@ local script = G2L["b3"];
 						game:GetService("ReplicatedStorage"):WaitForChild("ReplicationManager"):WaitForChild("Fire"):FireServer(unpack(args))
 					end
 				end
-				for _, dildos in ipairs(game.Players:GetPlayers()) do
-					for _, c in ipairs(dildos.Character:GetChildren()) do
-						if c:IsA("Tool") then
-							if c:FindFirstChild("Handle") then
-								local muz = c.Handle.Muzzle
-								if muz:IsA("Attachment") then
-									local nigpos = findnigers()
-									local forwardDirection = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.LookVector
-									local targetPosition = muz.WorldPosition + (forwardDirection * 50)
-									if nigpos then
-										createPurpleBeam(muz.WorldPosition, nigpos)
-									end
+				for _, c in ipairs(game.Players.LocalPlayer.Character:GetChildren()) do
+					if c:IsA("Tool") then
+						if c:FindFirstChild("Handle") then
+							local muz = c.Handle.Muzzle
+							if muz:IsA("Attachment") then
+								local nigpos = findnigers()
+								local forwardDirection = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.LookVector
+								local targetPosition = muz.WorldPosition + (forwardDirection * 50)
+								if nigpos then
+									createPurpleBeam(muz.WorldPosition, nigpos)
 								end
 							end
 						end
@@ -2779,8 +2778,10 @@ local script = G2L["b3"];
 					local snd = Instance.new("Sound", workspace)
 					snd.Name = "New ound"
 					snd.SoundId = "rbxassetid://17678772616"
-					snd:Play()
 					snd.Volume = 1
+					snd:Play()
+					task.wait(0.5)
+					snd:Destroy()
 				end
 			end)
 			script.Parent.Text = "Silient Aim: ON"
